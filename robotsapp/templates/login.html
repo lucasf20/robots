@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" align="center">
+    <div class="card w-50 mt-5">
+        <div class="card-body">
+            {% for message in messages %}
+            <div class="alert alert-danger">
+                <strong>Erro!</strong> {{message}}
+            </div>
+            {% endfor %}
+            <form method="POST" action="submit"> {% csrf_token %}
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Usuário</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="user"
+                            placeholder="Usuário">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Senha</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password" placeholder="Senha">
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-danger" value="Entrar" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
