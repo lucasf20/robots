@@ -23,4 +23,10 @@ class MyUserAdmin(UserAdmin):
 
 admin.site.register(Usuario, MyUserAdmin)
 admin.site.register(Cliente)
-admin.site.register(Robo)
+
+class RoboAdmin(admin.ModelAdmin):
+    ordering = ('codigo',)
+    search_fields = ('cliente__nome_da_empresa','campo1','campo2','campo3')
+    list_display= ('codigo', 'cliente', 'campo1','campo2','campo3')
+
+admin.site.register(Robo, RoboAdmin)
