@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 class Cliente(models.Model):
     codigo = models.AutoField(primary_key=True)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     nome_da_empresa = models.CharField(max_length=500)
-    cnpj = models.CharField(max_length=30)
+    cnpj = models.CharField(max_length=30, unique=True)
     data_de_cadastro = models.DateField()
 
     def __str__(self):

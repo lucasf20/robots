@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" align="center">
+    <div class="card w-50 mt-5">
+        <div class="card-body">
+            <h2>Dados do Robô {{robo.codigo}}</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Campo 1</th>
+                        <th>Campo 2</th>
+                        <th>Campo 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{robo.codigo}}</td>
+                        <td>{{robo.campo1}}</td>
+                        <td>{{robo.campo2}}</td>
+                        <td>{{robo.campo3}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-danger" href="/home/">Voltar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
