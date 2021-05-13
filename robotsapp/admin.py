@@ -26,7 +26,7 @@ admin.site.register(Cliente)
 
 class RoboAdmin(admin.ModelAdmin):
     ordering = ('codigo',)
-    search_fields = ('cliente__nome_da_empresa','campo1','campo2','campo3')
+    search_fields = ('codigo','cliente__nome_da_empresa','campo1','campo2','campo3')
     list_display= ('codigo', 'cliente', 'campo1','campo2','campo3')
 
 admin.site.register(Robo, RoboAdmin)
