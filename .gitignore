@@ -1,2 +1,6 @@
 libs
 *.sqlite3
+*.pyc
+*.pyo
+migrations/
+__pycache__/

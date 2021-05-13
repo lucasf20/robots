@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib import messages
-from .models import Robo, Cliente
+from .models import Robo, Cliente, Usuario
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def login(request):
-    if request.session._session: #verifica se há uma sessão ativa, caso haja, redireciona para página principal
+    if request.session._session: # verifica se há uma sessão ativa, caso haja, redireciona para página principal
         return redirect('/home/')
     
     return render(request, 'login.html')
@@ -36,16 +36,16 @@ def home(request):
     if user.is_staff: # verifica se o usuário é membro da equipe interna
         return redirect('/admin/') # redireciona para o admin
 
-    cliente = Cliente.objects.filter(usuario = user).first() # obtem o cliente a partir do usuário
+    cliente = user.cliente # obtem o cliente a partir do usuário
     robos = Robo.objects.filter(cliente = cliente) # obtem os robôs que este cliente possui
-    return render(request, 'home.html', {"robos":robos})
+    return render(request, 'home.html', {"robos":robos, "cliente":cliente})
 
 @login_required
 def robos(request, id):
     user = request.user # obtem o usuário da sessão
     robo = Robo.objects.filter(codigo = id).first() # busca o robo no banco de dados
 
-    if user.id != robo.cliente.usuario.id: # previne o acesso direto de um usuário que não seja o proprietário do robô
+    if user.cliente.codigo != robo.cliente.codigo: # previne o acesso direto de um usuário que não seja o proprietário do robô
         return redirect("/home/")
     
     return render(request, 'robo.html', {"robo":robo})
